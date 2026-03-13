@@ -74,8 +74,8 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="font-display font-black text-5xl sm:text-7xl lg:text-8xl xl:text-9xl uppercase tracking-tight leading-none mb-6"
         >
-          <span className="block text-white">NEXT LEVEL</span>
-          <span className="block text-nxt-red text-glow-red">ESPORTS</span>
+          <span className="block text-white">FEAR THE</span>
+          <span className="block text-nxt-red text-glow-red">NTX</span>
         </motion.h1>
 
         {/* Subheadline */}
