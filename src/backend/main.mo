@@ -22,7 +22,7 @@ actor {
   };
 
   var socialMediaLinks : SocialMediaLinks = {
-    discord = "";
+    discord = "https://discord.gg/dVMxcUsz";
     twitter = "";
     instagram = "";
     youtube = "";

@@ -2,6 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import type { SocialMediaLinks } from "../backend.d";
 import { useActor } from "./useActor";
 
+const DEFAULT_LINKS: SocialMediaLinks = {
+  discord: "https://discord.gg/dVMxcUsz",
+  twitter: "#",
+  instagram: "#",
+  youtube: "#",
+  tiktok: "#",
+};
+
 export function useDiscordMemberCount() {
   const { actor, isFetching } = useActor();
   return useQuery<bigint>({
@@ -23,25 +31,19 @@ export function useSocialMediaLinks() {
   return useQuery<SocialMediaLinks>({
     queryKey: ["socialMediaLinks"],
     queryFn: async () => {
-      if (!actor) {
-        return {
-          discord: "#",
-          twitter: "#",
-          instagram: "#",
-          youtube: "#",
-          tiktok: "#",
-        };
-      }
+      if (!actor) return DEFAULT_LINKS;
       try {
-        return await actor.getSocialMediaLinks();
-      } catch {
+        const links = await actor.getSocialMediaLinks();
+        // If discord link is empty in backend, use the hardcoded one
         return {
-          discord: "#",
-          twitter: "#",
-          instagram: "#",
-          youtube: "#",
-          tiktok: "#",
+          ...links,
+          discord:
+            links.discord && links.discord !== ""
+              ? links.discord
+              : DEFAULT_LINKS.discord,
         };
+      } catch {
+        return DEFAULT_LINKS;
       }
     },
     enabled: !!actor && !isFetching,
