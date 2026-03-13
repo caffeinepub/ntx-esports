@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Font Faces ──────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/assets/fonts/MonaSans[wdth,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ───────────────────────────────────────────────── */
+:root {
+  --radius: 0.25rem;
+
+  /* NXT Esports Dark Theme — always dark */
+  --background: 0.09 0 0;
+  --foreground: 0.97 0 0;
+
+  --card: 0.12 0 0;
+  --card-foreground: 0.97 0 0;
+
+  --popover: 0.14 0 0;
+  --popover-foreground: 0.97 0 0;
+
+  /* Crimson Red — primary brand color */
+  --primary: 0.55 0.22 27;
+  --primary-foreground: 0.97 0 0;
+
+  --secondary: 0.18 0 0;
+  --secondary-foreground: 0.97 0 0;
+
+  --muted: 0.16 0 0;
+  --muted-foreground: 0.60 0 0;
+
+  --accent: 0.55 0.22 27;
+  --accent-foreground: 0.97 0 0;
+
+  --destructive: 0.55 0.22 27;
+  --destructive-foreground: 0.97 0 0;
+
+  --border: 0.22 0 0;
+  --input: 0.20 0 0;
+  --ring: 0.55 0.22 27;
+
+  /* Chart colors */
+  --chart-1: 0.55 0.22 27;
+  --chart-2: 0.45 0.18 27;
+  --chart-3: 0.65 0.15 27;
+  --chart-4: 0.75 0.1 27;
+  --chart-5: 0.35 0.22 27;
+
+  /* Sidebar */
+  --sidebar: 0.11 0 0;
+  --sidebar-foreground: 0.97 0 0;
+  --sidebar-primary: 0.55 0.22 27;
+  --sidebar-primary-foreground: 0.97 0 0;
+  --sidebar-accent: 0.16 0 0;
+  --sidebar-accent-foreground: 0.97 0 0;
+  --sidebar-border: 0.22 0 0;
+  --sidebar-ring: 0.55 0.22 27;
+
+  /* NXT Custom Tokens */
+  --nxt-red: oklch(0.55 0.22 27);
+  --nxt-red-glow: oklch(0.55 0.22 27 / 0.4);
+  --nxt-red-bright: oklch(0.62 0.24 27);
+  --nxt-red-dim: oklch(0.45 0.18 27);
+  --nxt-black: oklch(0.09 0 0);
+  --nxt-dark: oklch(0.12 0 0);
+  --nxt-surface: oklch(0.15 0 0);
+  --nxt-border: oklch(0.22 0 0);
+  --nxt-text: oklch(0.97 0 0);
+  --nxt-text-muted: oklch(0.65 0 0);
+}
+
+/* ─── Smooth Scroll ───────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-family: "Mona Sans", "Cabinet Grotesk", sans-serif;
+  background-color: var(--nxt-black);
+  overflow-x: hidden;
+}
+
+/* ─── NXT Custom Utilities ────────────────────────────────────────── */
+@layer utilities {
+  .text-nxt-red {
+    color: var(--nxt-red);
+  }
+
+  .bg-nxt-red {
+    background-color: var(--nxt-red);
+  }
+
+  .border-nxt-red {
+    border-color: var(--nxt-red);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 20px var(--nxt-red-glow), 0 0 40px oklch(0.55 0.22 27 / 0.2);
+  }
+
+  .glow-red-hover:hover {
+    box-shadow: 0 0 25px var(--nxt-red-glow), 0 0 50px oklch(0.55 0.22 27 / 0.25);
+  }
+
+  .text-glow-red {
+    text-shadow: 0 0 30px var(--nxt-red-glow), 0 0 60px oklch(0.55 0.22 27 / 0.3);
+  }
+
+  .card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: var(--nxt-red) !important;
+    box-shadow: 0 0 20px var(--nxt-red-glow), 0 0 40px oklch(0.55 0.22 27 / 0.15);
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--nxt-red) 50%, transparent 100%);
+    opacity: 0.5;
+  }
+
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+
+  .font-display {
+    font-family: "Bricolage Grotesque", "Cabinet Grotesk", sans-serif;
+  }
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--nxt-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--nxt-red);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nxt-red-bright);
+}
+
+/* ─── Selection ───────────────────────────────────────────────────── */
+::selection {
+  background: oklch(0.55 0.22 27 / 0.4);
+  color: white;
+}
+
+/* ─── Animations ──────────────────────────────────────────────────── */
+@keyframes pulse-red {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--nxt-red-glow);
+  }
+  50% {
+    box-shadow: 0 0 25px var(--nxt-red-glow), 0 0 50px oklch(0.55 0.22 27 / 0.2);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-pulse-red {
+  animation: pulse-red 2.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ─── Form Focus Styles ───────────────────────────────────────────── */
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--nxt-red) !important;
+  box-shadow: 0 0 0 2px oklch(0.55 0.22 27 / 0.3);
+}
